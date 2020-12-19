@@ -7,28 +7,29 @@ def kmeans():
 
 	print("Enter N coordinate values: ")
 	for i in range(N):
-		x, y = map(float, input().split())
-		data.append([x,y])
+		row = list(map(float, input().split()))
+		data.append(row)
+		dim  = len(row)
 
-	centers = list(map(int, input("Enter indices of initial means: ").split()))
-	for i in range(len(centers)):
-		centers[i] = data[centers[i]]
+	means = list(map(int, input("Enter indices of initial means: ").split()))
+	for i in range(len(means)):
+		means[i] = data[means[i]]
 
 	print ("\nData: ", data)
-	print ("\nInitial means: ", centers)
+	print ("\nInitial means: ", means)
 
 	while True:
 
-	  # distance matrix  inititalize
+	  # distance matrix  - dist[i][j] is distance of ith point to jth mean
 	  dist = [[] for i in range(N)]
 
 	  # euclidean distance
 	  for i in range(N):
-	    for c in centers:
+	    for mean in means:
 	      
 	      squaredEuclideanDistance = 0
 	      for j in range(dim):
-	        squaredEuclideanDistance = squaredEuclideanDistance + (data[i][j] - c[j])**2
+	        squaredEuclideanDistance = squaredEuclideanDistance + (data[i][j] - mean[j])**2
 	      
 	      euclidianDistance = math.sqrt(squaredEuclideanDistance)
 	      dist[i].append(euclidianDistance);
@@ -51,7 +52,7 @@ def kmeans():
 	  print('\n--------------\n')
 
 	  # compute new mean
-	  newCenters = []
+	  newMeans = []
 	  for bucket in buckets:
 	    cen = []
 	    for j in range(dim):
@@ -60,13 +61,13 @@ def kmeans():
 	      for i in range(len(bucket)):
 	        sum += bucket[i][j]
 	      cen.append(sum/len(bucket))
-	    newCenters.append(cen)
+	    newMeans.append(cen)
 	  
-	  if newCenters == centers:
-	    return centers
+	  if newMeans == means:
+	    return means
 	  else:
-	   	centers = newCenters
+	   	means = newMeans
 
-	  print ("\nNew means: ", centers)
+	  print ("\nNew means: ", means)
 
 kmeans()
