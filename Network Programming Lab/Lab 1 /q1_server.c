@@ -12,7 +12,7 @@ int cmpfunc (const void * a, const void * b) {
    return ( *(int*)a - *(int*)b );
 }
 
-char * toCharArray(int number)
+char * toChar(int number)
 {
     int n = floor(log10(number)) + 1;
     int i;
@@ -104,8 +104,7 @@ int main() {
 			strcpy(message,"Sorted Array: ");
 
 			for(i = 0 ; i < n ; i++) {
-				char *temp = 
-				strcat(message, toCharArray(numbers[i]));
+				strcat(message, toChar(numbers[i]));
 				strcat(message, " ");
 			}
 
@@ -117,10 +116,10 @@ int main() {
 
 			for(i = 0 ; i < n ; i++) {
 				if(numbers[i]%2) {
-					strcat(odd, toCharArray(numbers[i]));
+					strcat(odd, toChar(numbers[i]));
 					strcat(odd, " ");
 				} else {
-					strcat(even, toCharArray(numbers[i]));
+					strcat(even, toChar(numbers[i]));
 					strcat(even, " ");
 				}
 			}
